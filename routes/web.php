@@ -1,5 +1,8 @@
 <?php
 
+use Faker\Generator as Faker; 
+// use Intervention\Image\Image;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,4 +20,16 @@ Route::get('/', function () {
 
 Route::get('/blog/show', function () {
     return view('blog.show');
+});
+
+
+Route::get('/images', function()
+{
+    $img = Image::make('foo.jpg')->resize(300, 200);
+
+    return $img->response('jpg');
+});
+
+Route::get('/faker', function(Faker $faker) {
+    return '<img src=" '. $faker->imageUrl($width = 300, $height=300, 'food', true, 'CATS') . '" />';
 });
